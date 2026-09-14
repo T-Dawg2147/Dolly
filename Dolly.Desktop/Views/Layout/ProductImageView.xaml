@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Dolly.Desktop.Views.Layout.ProductImageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#EEF3DF" BorderBrush="#B7B7B7" BorderThickness="1">
+            <TextBlock Text="Product Image"
+                       FontWeight="Bold"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Border>
+
+        <Border Grid.Row="2" BorderBrush="#B7B7B7" BorderThickness="1" Background="White">
+            <Image Source="{Binding CurrentImagePath}" Stretch="Uniform" />
+        </Border>
+    </Grid>
+</UserControl>

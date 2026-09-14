@@ -1,0 +1,20 @@
+﻿Dolly.Desktop
+
+
+winexe
+C#
+.cs
+C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Desktop\obj\Debug\net10.0-windows\
+Dolly.Desktop
+none
+false
+TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Desktop\App.xaml
+241584648954
+
+62630691759
+2651356316283
+Resources\Converters.xaml;Resources\GlobalResources.xaml;Resources\ProductEditTheme.xaml;Views\AddRelatedProductWindow.xaml;Views\Layout\ProductImageView.xaml;Views\Layout\ProductOverviewView.xaml;Views\Layout\ProductsPaneView.xaml;Views\Layout\SuppliersAndProductsShellView.xaml;Views\MainWindow.xaml;Views\ProductEditWindow.xaml;Views\RelatedProductsWindow.xaml;Views\SearchResultsWindow.xaml;Views\SuppliersAndProductsView.xaml;Views\Tabs\AdditionalInfoView.xaml;Views\Tabs\CarriageDetailsView.xaml;Views\Tabs\ImageUpdatesView.xaml;Views\Tabs\MainTabsHostView.xaml;Views\Tabs\PageNumbersView.xaml;Views\Tabs\PurchaseOrderDetailsView.xaml;Views\Tabs\QualityAuditView.xaml;Views\Tabs\ReportsView.xaml;Views\Tabs\SalesOverviewView.xaml;Views\Tabs\SupplierDetailsView.xaml;Views\Tabs\UnspscUpdateView.xaml;
+
+False
+

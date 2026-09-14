@@ -1,0 +1,450 @@
+﻿<Window x:Class="Dolly.Desktop.Views.ProductEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Dolly.Desktop.Converters"
+        Title="{Binding WindowTitle}"
+        Width="1420" Height="900"
+        MinWidth="1280" MinHeight="820"
+        WindowStartupLocation="CenterOwner"
+        Background="#F3F3F3">
+    
+    <Window.Resources>
+        <Style x:Key="PriceBreakTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}}" Value="Invalid">
+                    <Setter Property="Background" Value="#F07474"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <converters:BoolToInvalidTagConverter x:Key="BoolToInvalidTagConverter"/>
+    </Window.Resources>
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- HEADER -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="74"/><ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="56"/><ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="74"/><ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="56"/><ColumnDefinition Width="94"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="65"/><ColumnDefinition Width="65"/><ColumnDefinition Width="65"/><ColumnDefinition Width="65"/><ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="78"/><ColumnDefinition Width="8"/><ColumnDefinition Width="78"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Design No." VerticalAlignment="Center" FontWeight="SemiBold"/>
+            <TextBox Grid.Column="1" Text="{Binding DesignNo}" IsReadOnly="True"/>
+
+            <TextBlock Grid.Column="2" Text="Page No" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="3" Text="{Binding PageNo}" IsReadOnly="True"/>
+
+            <!-- not always shown live -->
+            <TextBlock Grid.Column="4" Text="Object Type" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <TextBox Grid.Column="5" Text="{Binding ObjectType}" IsReadOnly="True" Background="#CDE6C1" FontWeight="SemiBold" HorizontalContentAlignment="Center" /> <!-- TODO: Change colour depending on object type; Red = Withdrawn -->
+
+            <CheckBox Grid.Column="9" Content="Image" IsChecked="{Binding HasImage}" IsEnabled="False"/>
+            <CheckBox Grid.Column="10" Content="Heading" IsChecked="{Binding HasHeading}" IsEnabled="False"/>
+            <CheckBox Grid.Column="11" Content="Bullets" IsChecked="{Binding HasBullets}" IsEnabled="False"/>
+            <CheckBox Grid.Column="12" Content="Price" IsChecked="{Binding HasPrice}" IsEnabled="False"/>
+            <CheckBox Grid.Column="13" Content="Pre-Order" IsChecked="{Binding HasPreOrder}" IsEnabled="False"/>
+
+            <Button Grid.Column="15" Content="Cancel" Command="{Binding CancelCommand}"/>
+            <Button Grid.Column="17" Content="Save" Command="{Binding SaveCommand}"/>
+        </Grid>
+
+        <!-- MAIN -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.06*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="1.11*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="0.98*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="2.35*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="1.80*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="1.60*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="115"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="26"/><RowDefinition Height="26"/></Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Long Description 1" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding LongDescription1}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Long Description 2" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding LongDescription2}"/>
+                </Grid>
+
+                <GroupBox Grid.Row="2" Header="Supplier and Costs">
+                    <Grid Margin="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="132"/><ColumnDefinition Width="*"/><ColumnDefinition Width="86"/><ColumnDefinition Width="74"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Supplier Name" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding SupplierNameOptions}" Text="{Binding SupplierName}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Supplier Product Code" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SupplierProductCode}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Supplier List Price" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SupplierListPrice}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Supplier Discount" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SupplierDiscount}"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Net Cost" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding NetCost}"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Net Cost 2" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="5" Grid.Column="1"
+                                 Text="{Binding NetCost2}"
+                                 Style="{StaticResource PriceBreakTextBoxStyle}">
+                            <TextBox.Tag>
+                                <Binding Path="NetCost2Invalid" Converter="{StaticResource BoolToInvalidTagConverter}"/>
+                            </TextBox.Tag>
+                        </TextBox>
+                        
+                        <TextBlock Grid.Row="5" Grid.Column="2" Text="Min Qty 2" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="5" Grid.Column="3"
+                                 Text="{Binding MinQty2}"
+                                 Style="{StaticResource PriceBreakTextBoxStyle}">
+                            <TextBox.Tag>
+                                <Binding Path="MinQty2Invalid" Converter="{StaticResource BoolToInvalidTagConverter}"/>
+                            </TextBox.Tag>
+                        </TextBox>
+
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Net Cost 3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="6" Grid.Column="1"
+                                 Text="{Binding NetCost3}"
+                                 Style="{StaticResource PriceBreakTextBoxStyle}">
+                            <TextBox.Tag>
+                                <Binding Path="NetCost3Invalid" Converter="{StaticResource BoolToInvalidTagConverter}"/>
+                            </TextBox.Tag>
+                        </TextBox>
+                        
+                        <TextBlock Grid.Row="6" Grid.Column="2" Text="Min Qty 3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="6" Grid.Column="3"
+                                 Text="{Binding MinQty3}"
+                                 Style="{StaticResource PriceBreakTextBoxStyle}">
+                            <TextBox.Tag>
+                                <Binding Path="MinQty3Invalid" Converter="{StaticResource BoolToInvalidTagConverter}"/>
+                            </TextBox.Tag>
+                        </TextBox>
+
+                        <TextBlock Grid.Row="7" Grid.Column="0" Text="Currency" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding CurrencyFactor}"/>
+                        <TextBlock Grid.Row="7" Grid.Column="2" Text="Actual LandedCost" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding ActualLandedCost}"/>
+
+                        <TextBlock Grid.Row="8" Grid.Column="0" Text="Freight In %" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding FreightIn}"/>
+
+                        <TextBlock Grid.Row="9" Grid.Column="0" Text="Standard Cost" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding StandardCost}"/>
+                        <CheckBox Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" Content="Use Actual Cost" IsChecked="{Binding UseActualCost}"/>
+
+                        <TextBlock Grid.Row="10" Grid.Column="0" Text="Carriage Type" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding CarriageType}" Background="#CDE6C1"/>
+
+                        <TextBlock Grid.Row="11" Grid.Column="0" Text="Carriage Charge" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding CarriageCharge}"/>
+                        <TextBlock Grid.Row="11" Grid.Column="2" Text="Additional Costs" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="11" Grid.Column="3" Text="{Binding AdditionalCosts}"/>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Grid.Row="4" Header="Carriage Used and Zones">
+                    <Grid Margin="8">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="96"/><ColumnDefinition Width="70"/><ColumnDefinition Width="*"/><ColumnDefinition Width="96"/><ColumnDefinition Width="70"/></Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Zone A" VerticalAlignment="Center"/><TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ZoneA}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Zone B" VerticalAlignment="Center"/><TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ZoneB}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Zone C" VerticalAlignment="Center"/><TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ZoneC}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Zone D" VerticalAlignment="Center"/><TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ZoneD}"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Zone E" VerticalAlignment="Center"/><TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ZoneE}"/>
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Zone S" VerticalAlignment="Center"/><TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ZoneS}"/>
+
+                        <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="6" Margin="8,0,8,0" Text="{Binding ZoneDefinitions}" TextWrapping="Wrap"/>
+
+                        <TextBlock Grid.Row="7" Grid.Column="0" Text="Shipping Method" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ShippingMethod}"/>
+                        <TextBlock Grid.Row="7" Grid.Column="3" Text="Small Order Value" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding SmallOrderValue}"/>
+
+                        <TextBlock Grid.Row="8" Grid.Column="0" Text="Shipping Cost" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ShippingCost}"/>
+                        <TextBlock Grid.Row="8" Grid.Column="3" Text="Small Order Charge" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="8" Grid.Column="4" Text="{Binding SmallOrderCharge}"/>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Grid.Row="6" Header="Selling Price and Margin">
+                    <Grid Margin="8">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="136"/><ColumnDefinition Width="*"/><ColumnDefinition Width="84"/><ColumnDefinition Width="84"/></Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Total Cost" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TotalCost}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="Margin" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Margin}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Selling Price 1" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SellingPrice1}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="SO Margin" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding SoMargin}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Selling Price 2" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SellingPrice2}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Selling Price 3" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SellingPrice3}"/>
+                        <Button Grid.Row="3" Grid.Column="3" Content="Change" Command="{Binding ChangePriceCommand}"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="UK Promo Price" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding UkPromoPrice}"/>
+
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="ROI Promo Price" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding RoiPromoPrice}"/>
+                        <Button Grid.Row="6" Grid.Column="3" Content="Add" Command="{Binding AddPromoCommand}"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+
+            <!-- MIDDLE -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="42"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="2.35*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="1.30*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="1.55*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="90"/><ColumnDefinition Width="*"/><ColumnDefinition Width="84"/><ColumnDefinition Width="*"/><ColumnDefinition Width="120"/></Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions><RowDefinition Height="20"/><RowDefinition Height="20"/></Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Parent ID" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ParentId}" IsReadOnly="True"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Base Code" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding BaseCode}" IsReadOnly="True"/>
+
+                    <Button Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" Content="Push To Magento" Command="{Binding PushMagentoCommand}"/>
+                </Grid>
+
+                <GroupBox Grid.Row="2" Header="Stocking and Lead Times etc">
+                    <Grid Margin="8">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="130"/><ColumnDefinition Width="*"/><ColumnDefinition Width="88"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Stock Status" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding StockStatusOptions}" Text="{Binding StockStatus}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Next Day" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding YesNoOptions}" Text="{Binding GreenFlag}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Country of Origin" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" ItemsSource="{Binding CountryOptions}" Text="{Binding CountryOfOrigin}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Lead Time (Days)" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding LeadTime}"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Supplier Due Date" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SupplierDueDate}"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Web Delivery" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" ItemsSource="{Binding WebDeliveryOptions}" Text="{Binding WebDeliveryIcon}"/>
+
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Min Order Quantity" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding MinOrderQuantity}"/>
+
+                        <TextBlock Grid.Row="7" Grid.Column="0" Text="Made To Order" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="7" Grid.Column="1" ItemsSource="{Binding YesNoOptions}" Text="{Binding MadeToOrder}"/>
+
+                        <TextBlock Grid.Row="8" Grid.Column="0" Text="Made In UK" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="8" Grid.Column="1" ItemsSource="{Binding YesNoOptions}" Text="{Binding MadeInUk}"/>
+
+                        <TextBlock Grid.Row="9" Grid.Column="0" Text="Tariff Code" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding TariffCode}"/>
+                        <TextBlock Grid.Row="9" Grid.Column="2" Text="Component" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="9" Grid.Column="3" ItemsSource="{Binding YesNoOptions}" Text="{Binding Component}"/>
+
+                        <!-- not always shown live -->
+                        <TextBlock Grid.Row="7" Grid.Column="2" Text="Override" VerticalAlignment="Center" Visibility="Collapsed"/>
+                        <ComboBox Grid.Row="7" Grid.Column="3" Text="{Binding Override}" Visibility="Collapsed"/>
+                        <TextBlock Grid.Row="8" Grid.Column="2" Text="Manage Stock" VerticalAlignment="Center" Visibility="Collapsed"/>
+                        <ComboBox Grid.Row="8" Grid.Column="3" Text="{Binding ManageStock}" Visibility="Collapsed"/>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Grid.Row="4" Header="Volumetrics and Weight">
+                    <Grid Margin="8">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/><ColumnDefinition Width="104"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Packaging Height mm" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding PackagingHeight}"/>
+                        <CheckBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Content="Use Pallet Rate" IsChecked="{Binding UsePalletRate}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Packaging Width mm" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding PackagingWidth}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="No of Pallets" VerticalAlignment="Center" Foreground="Gray"/>
+                        <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding NoOfPallets}" IsEnabled="{Binding UsePalletRate}"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Packaging Length mm" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding PackagingLength}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Weight Kg" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Weight}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="2" Text="Boxed" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="3" Grid.Column="3" ItemsSource="{Binding YesNoOptions}" Text="{Binding Boxed}"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Despatch Method" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ShippingMethod}" IsReadOnly="True"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Despatch Cost" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ShippingCosts}" IsReadOnly="True"/>
+                        <Button Grid.Row="5" Grid.Column="3" Content="Re-Price" Command="{Binding RePriceCommand}"/>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Grid.Row="6" Header="Show and Tell">
+                    <Grid Margin="8">
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition Width="*"/><ColumnDefinition Width="95"/><ColumnDefinition Width="120"/></Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                            <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Discontinued Date" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding DiscontinuedDate}"/>
+                        <Button Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Content="Withdraw Product" Command="{Binding WithdrawProductCommand}" Background="#E35D5D" Foreground="White"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Reason" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" Text="{Binding DiscontinuedReason}" ItemsSource="{Binding DiscontinuedReasonOptions}"/>
+                        <CheckBox Grid.Row="1" Grid.Column="3" Content="Run to Zero" IsChecked="{Binding RunToZero}"/>
+
+                        <CheckBox Grid.Row="2" Grid.Column="3" Content="Transactional" IsChecked="{Binding Transactional}"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Release Date" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ReleaseDate}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="2" Text="Web Stores" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Row="3" Grid.Column="3" Text="{Binding WebStores}" ItemsSource="{Binding WebStoreOptions}"/>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Product Supplier Message" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding ProductSupplierMessage}"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Product Message" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding ProductMessage}" AcceptsReturn="True"/>
+
+                        <TextBlock Grid.Row="7" Grid.Column="0" Text="Start Date" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ProductMessageStartDate}"/>
+                        <TextBlock Grid.Row="7" Grid.Column="2" Text="End Date" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding ProductMessageEndDate}"/>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+
+            <!-- RIGHT -->
+            <Grid Grid.Column="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.35*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="2.00*"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Grid.Row="0" Header="Primary Image and Overlays">
+                    <Grid Margin="8">
+                        <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="8"/><RowDefinition Height="Auto"/><RowDefinition Height="8"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" BorderBrush="#B7B7B7" BorderThickness="1" Background="White">
+                            <Image Source="{Binding PrimaryImagePath}" Stretch="Uniform"/>
+                        </Border>
+
+                        <Button Grid.Row="2" HorizontalAlignment="Right" Content="Upload/Edit" Command="{Binding UploadEditImageCommand}"/>
+
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="90"/><ColumnDefinition Width="*"/><ColumnDefinition Width="84"/></Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions><RowDefinition Height="26"/><RowDefinition Height="26"/></Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Web Overlay" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding WebOverlayOptions}" Text="{Binding WebOverlay}"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Web Exclusive" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding WebExclusiveOptions}" Text="{Binding WebExclusive}"/>
+
+                            <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Content="Update" Command="{Binding UpdateOverlayCommand}"/>
+                        </Grid>
+
+                        <!-- design-only No/Yes buttons (not visible in live screenshot) -->
+                        <StackPanel Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="4" Visibility="Collapsed">
+                            <Button Content="No" Width="40" Margin="0,0,0,4"/>
+                            <Button Content="Yes" Width="40"/>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Grid.Row="2" Header="Product History">
+                    <DataGrid ItemsSource="{Binding ProductHistoryRows}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Attribute" Binding="{Binding Attribute}" Width="*"/>
+                            <DataGridTextColumn Header="Old Value" Binding="{Binding OldValue}" Width="*"/>
+                            <DataGridTextColumn Header="New Value" Binding="{Binding NewValue}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+            </Grid>
+        </Grid>
+
+        <!-- FOOTER -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <CheckBox Content="Show related on web" IsChecked="{Binding DisplayRelated}" Margin="0,0,10,0"/>
+            <Button Content="Related Products" Command="{Binding OpenRelatedProductsCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,6 @@
+﻿<UserControl x:Class="Dolly.Desktop.Views.SuppliersAndProductsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:layout="clr-namespace:Dolly.Desktop.Views.Layout">
+    <layout:SuppliersAndProductsShellView/>
+</UserControl>

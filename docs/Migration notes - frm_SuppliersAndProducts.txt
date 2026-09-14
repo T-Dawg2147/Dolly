@@ -1,0 +1,70 @@
+/*
+MAIN WINDOW VBA MIGRATION OPINIONS
+
+1) SyncSubforms:
+   - Access-only mechanism using bookmarks/recordset clones.
+   - In WPF this should NOT be ported directly.
+   - Replace with SupplierContextState + observable viewmodels.
+   - Status: OBSOLETE in WPF architecture.
+
+2) Repeated fn_SupplierProducts / fn_Sales query rewrites:
+   - Currently duplicated in 4+ handlers.
+   - Must be centralized (single service method).
+   - Status: KEEP behavior, REFACTOR implementation.
+
+3) cmdEditCarriage_Click:
+   - Business-critical but over-coupled to control locking and temp tables.
+   - Keep all validation/save behavior first; then refactor enable/disable to VM state.
+   - Status: KEEP + REFACTOR PHASE 2.
+
+4) DoCmd.SetWarnings False:
+   - Legacy Access safety bypass; avoid in new app.
+   - Use explicit try/catch + transaction + user message.
+   - Status: DO NOT PORT AS-IS.
+
+5) Hardcoded supplier warning popups in UI event:
+   - Better moved to policy/config table from DB.
+   - Status: KEEP behavior, MOVE data source.
+
+6) File operations in click handlers:
+   - Keep only if still operationally required by team.
+   - Else remove from main flow.
+
+[KEEP] comEditAddress_Click
+- Implement as IsAddressEditMode bool in SupplierDetails VM.
+- Bind IsReadOnly/IsEnabled in XAML rather than toggling each control manually.
+
+[KEEP+REFACTOR] Report exports (comRunToZero_Click, comSupplierReport_Click, etc.)
+- Centralize folder picker + progress + execute + completion message.
+- Single generic service method pattern.
+
+[KEEP] comUpdateCreate_Click
+- Validation logic is important. Keep all rules.
+- Refactor DLookup uniqueness checks into repository/service-level SQL checks.
+
+[KEEP] comUseUNSPSC_Click
+- Keep batching option and warning suppression.
+- Use explicit transaction + command; avoid global warning toggles.
+
+[KEEP] tboSearchTerm_AfterUpdate
+- Keep boolean operator support behavior.
+- Implement as search dialog in WPF.
+
+[OPTIONAL/ADMIN] comImageUpdated_Click + lstImagesToUpdate_* 
+- Keep if image queue process is active in current operations.
+- Abstract filesystem and remote fetch in services.
+
+[DO NOT PORT AS-IS]
+- DoCmd.SetWarnings False pattern
+- Direct UI form cross-references
+- Access-only form lifecycle calls (SizeAccess, AccessCloseButtonEnabled)
+*/
+
+/*
+Group-filter parity with Access SearchResults:
+
+- For ProductGroup results, we now set SupplierContextState.GroupFilterParentId.
+- Products grid shows only rows with Parent == GroupFilterParentId.
+- Banner indicates active filter and provides a Clear Filter button.
+- Supplier/product navigation still occurs at the same time.
+*/

@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Dolly.Desktop.Views.Tabs.MainTabsHostView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:tabs="clr-namespace:Dolly.Desktop.Views.Tabs">
+    <Grid>
+        <TabControl SelectedIndex="{Binding SelectedTabIndex}">
+            <TabItem Header="Supplier Details">
+                <tabs:SupplierDetailsView DataContext="{Binding SupplierDetails}"/>
+            </TabItem>
+            <TabItem Header="Carriage Details">
+                <tabs:CarriageDetailsView DataContext="{Binding CarriageDetails}"/>
+            </TabItem>
+            <TabItem Header="Purchase Order Details">
+                <tabs:PurchaseOrderDetailsView DataContext="{Binding PurchaseOrders}"/>
+            </TabItem>
+            <TabItem Header="Additional Info">
+                <tabs:AdditionalInfoView DataContext="{Binding AdditionalInfo}"/>
+            </TabItem>
+            <TabItem Header="Reports">
+                <tabs:ReportsView DataContext="{Binding Reports}"/>
+            </TabItem>
+            <TabItem Header="Quality and Audit">
+                <tabs:QualityAuditView DataContext="{Binding QualityAudit}"/>
+            </TabItem>
+            <TabItem Header="Sales Overview">
+                <tabs:SalesOverviewView DataContext="{Binding SalesOverview}"/>
+            </TabItem>
+            <TabItem Header="Page Numbers">
+                <tabs:PageNumbersView DataContext="{Binding PageNumbers}"/>
+            </TabItem>
+            <TabItem Header="UNSPSC Update">
+                <tabs:UnspscUpdateView DataContext="{Binding UnspscUpdate}"/>
+            </TabItem>
+            <TabItem Header="Image Updates">
+                <tabs:ImageUpdatesView DataContext="{Binding ImageUpdates}"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
