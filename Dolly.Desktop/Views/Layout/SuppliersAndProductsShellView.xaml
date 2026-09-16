@@ -2,39 +2,44 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:layout="clr-namespace:Dolly.Desktop.Views.Layout"
-             xmlns:tabs="clr-namespace:Dolly.Desktop.Views.Tabs"
-             MaxWidth="1920"
-             MinWidth="1080">
+             xmlns:tabs="clr-namespace:Dolly.Desktop.Views.Tabs">
     <Grid Margin="6" Background="{StaticResource PeBgBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="390"/>
+            <RowDefinition Height="400"/>
             <RowDefinition Height="8"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <!-- TOP ROW: Tabs, Image, and Overview panels -->
+        <Grid Grid.Row="0" Name="TopPanelsGrid">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.95*"/>
+                <ColumnDefinition Width="1000"/>
                 <ColumnDefinition Width="8"/>
-                <ColumnDefinition Width="1.00*"/>
+                <ColumnDefinition Width="Auto" Name="ProductImageColumn"/>
                 <ColumnDefinition Width="8"/>
-                <ColumnDefinition Width="1.25*"/>
+                <ColumnDefinition Width="Auto" Name="ProductOverviewColumn"/>
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" BorderBrush="#B7B7B7" BorderThickness="1" Background="White">
+            <!-- Main Tabs Panel (Always Visible) -->
+            <Border Grid.Column="0" BorderBrush="#B7B7B7" BorderThickness="1" Background="White" Name="TabsHostBorder" HorizontalAlignment="Left">
                 <tabs:MainTabsHostView DataContext="{Binding TabsHost}"/>
             </Border>
 
-            <Border Grid.Column="2" BorderBrush="#B7B7B7" BorderThickness="1" Background="White">
-                <layout:ProductImageView DataContext="{Binding ProductImage}" Height="Auto" Width="Auto"/>
+            <!-- Product Image Panel (Hidden by default) -->
+            <Border Grid.Column="2" BorderBrush="#B7B7B7" BorderThickness="1" Background="White" 
+                    Name="ProductImageBorder" Visibility="Collapsed" Width="0">
+                <layout:ProductImageView DataContext="{Binding ProductImage}" />
             </Border>
 
-            <Border Grid.Column="4" BorderBrush="#B7B7B7" BorderThickness="1" Background="White">
+            <!-- Product Overview Panel (Hidden by default) -->
+            <Border Grid.Column="4" BorderBrush="#B7B7B7" BorderThickness="1" Background="White" 
+                    Name="ProductOverviewBorder" Visibility="Collapsed" Width="0">
                 <layout:ProductOverviewView DataContext="{Binding ProductOverview}"/>
             </Border>
         </Grid>
 
-        <Border Grid.Row="2" BorderBrush="#B7B7B7" BorderThickness="1" Background="White">
+        <!-- BOTTOM ROW: Products Pane -->
+        <Border Grid.Row="2" BorderBrush="#B7B7B7" BorderThickness="1" Background="White" Name="ProductsPaneBorder">
             <layout:ProductsPaneView DataContext="{Binding ProductsPane}"/>
         </Border>
     </Grid>

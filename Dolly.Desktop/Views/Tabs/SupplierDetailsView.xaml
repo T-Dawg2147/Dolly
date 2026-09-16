@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Dolly.Desktop.Views.Tabs.SupplierDetailsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             MinWidth="1100">
+             MinWidth="960">
     <Grid Margin="6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.70*"/>
@@ -39,7 +39,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Supplier" Style="{StaticResource LabelTextBlock}"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SupplierCode}" Style="{StaticResource ReadOnlyTextBox}" Margin="0,0,50,0"
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SupplierCode}" Style="{StaticResource ReadOnlyTextBox}" Margin="0,0,0,0"
                      HorizontalContentAlignment="Center"/>
             <Button Grid.Row="0" Grid.Column="2" Content="Change Name" Command="{Binding ChangeNameCommand}" Margin="28,0,0,0"
                     VerticalContentAlignment="Top"/>
@@ -210,25 +210,32 @@
             </Border>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Send Questionnaire" Style="{StaticResource LabelTextBlock}"/>
-            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SendQuestionnaireOptions}" SelectedItem="{Binding SendQuestionnaire}"/>
+            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SendQuestionnaireOptions}" SelectedItem="{Binding SendQuestionnaire}"
+                      Margin="20,0,0,0"/>
 
             <TextBlock Grid.Row="2" Grid.Column="0" Text="Sent" Style="{StaticResource LabelTextBlock}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding DateSent}" Style="{StaticResource ReadOnlyTextBox}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding DateSent}" Style="{StaticResource ReadOnlyTextBox}"
+                     Margin="20,0,0,0"/>
 
             <TextBlock Grid.Row="3" Grid.Column="0" Text="Received" Style="{StaticResource LabelTextBlock}"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding DateCompleted}" Style="{StaticResource ReadOnlyTextBox}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding DateCompleted}" Style="{StaticResource ReadOnlyTextBox}"
+                     Margin="20,0,0,0"/>
 
             <TextBlock Grid.Row="4" Grid.Column="0" Text="Grant extension" Style="{StaticResource LabelTextBlock}"/>
-            <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding ExtensionOptions}" SelectedItem="{Binding GrantExtension}"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding ExtensionOptions}" SelectedItem="{Binding GrantExtension}"
+                      Margin="20,0,0,0"/>
 
             <TextBlock Grid.Row="5" Grid.Column="0" Text="Extension date" Style="{StaticResource LabelTextBlock}"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ExtensionDate}" Style="{StaticResource ReadOnlyTextBox}"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ExtensionDate}" Style="{StaticResource ReadOnlyTextBox}"
+                     Margin="20,0,0,0"/>
 
             <TextBlock Grid.Row="6" Grid.Column="0" Text="Reminder" Style="{StaticResource LabelTextBlock}"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ChaseLetterDate}" Style="{StaticResource ReadOnlyTextBox}"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ChaseLetterDate}" Style="{StaticResource ReadOnlyTextBox}"
+                     Margin="20,0,0,0"/>
 
             <TextBlock Grid.Row="7" Grid.Column="0" Text="Held" Style="{StaticResource LabelTextBlock}"/>
-            <ComboBox Grid.Row="7" Grid.Column="1" ItemsSource="{Binding HeldOptions}" SelectedItem="{Binding HeldLetter}"/>
+            <ComboBox Grid.Row="7" Grid.Column="1" ItemsSource="{Binding HeldOptions}" SelectedItem="{Binding HeldLetter}"
+                      Margin="20,0,0,0"/>
 
             <Border Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" BorderBrush="#B7B7B7" BorderThickness="1" Background="#EEF3DF">
                 <TextBlock Text="Pricing Comments" FontWeight="SemiBold" TextAlignment="Center" VerticalAlignment="Center"/>

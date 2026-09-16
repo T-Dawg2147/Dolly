@@ -37,7 +37,7 @@
                           SelectionMode="Single"
                           SelectionUnit="FullRow"
                           HorizontalScrollBarVisibility="Visible"
-                          VerticalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Visible"
                           MouseDoubleClick="DesignNo_OnMouseDoubleClick">
                     <DataGrid.Columns>
                     <DataGridTextColumn Header="Supplier Code" Binding="{Binding SupplierCode}" Width="95"/>

@@ -13,3 +13,4 @@ C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debu
 C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\refint\Dolly.Infrastructure.dll
 C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.Infrastructure.pdb
 C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\ref\Dolly.Infrastructure.dll
+C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.Infrastructure.sourcelink.json

@@ -147,3 +147,4 @@ C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Desktop\obj\Debug\net10
 C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Desktop\obj\Debug\net10.0-windows\Views\Tabs\SalesOverviewView.baml
 C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Desktop\obj\Debug\net10.0-windows\Views\Tabs\UnspscUpdateView.baml
 C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Desktop\obj\Debug\net10.0-windows\Resources\GlobalResources.baml
+C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Desktop\obj\Debug\net10.0-windows\Dolly.Desktop.sourcelink.json
