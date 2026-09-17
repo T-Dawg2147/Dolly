@@ -3,10 +3,289 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Dolly.Desktop.Views.Tabs"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        
+             d:DesignWidth="960"
+             d:DesignHeight="360">
+
+    <UserControl.Resources>
+        <Style x:Key="InfoLabel" TargetType="TextBlock" BasedOn="{StaticResource LabelTextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="InfoLabelBordered" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#8C8C8C"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <Style x:Key="InfoInput" TargetType="TextBox">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Padding" Value="4,1"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+
+        <Style x:Key="InfoCombo" TargetType="ComboBox">
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+
+        <Style x:Key="InfoDisabledLabel" TargetType="TextBlock" BasedOn="{StaticResource InfoLabel}">
+            <Setter Property="Foreground" Value="#A0A0A0"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="10,8,10,8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.35*"/>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="0.85*"/>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="2.35*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ===================== LEFT PANEL ===================== -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="8"/>
+                <RowDefinition Height="76"/>
+                <RowDefinition Height="8"/>
+                <RowDefinition Height="76"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Row 0: Previous Name(s) -->
+            <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource InfoLabelBordered}">
+                <TextBlock Text="Previous Name(s)" Style="{StaticResource InfoLabel}" Margin="4,0,0,0"/>
+            </Border>
+            <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
+                     Text="{Binding PreviousNames}" Style="{StaticResource InfoInput}"/>
+
+            <!-- Row 1: Current Status / Year Last Used -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Current Status" Style="{StaticResource InfoLabel}"/>
+            <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,0,8,0"
+                      Text="{Binding CurrentStatus}" ItemsSource="{Binding StatusOptions}"
+                      Style="{StaticResource InfoCombo}"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="Year Last Used" Style="{StaticResource InfoLabel}"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding YearLastUsed}" Style="{StaticResource InfoInput}"/>
+
+            <!-- Row 2: Discontinued Reason (disabled look) -->
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Discontinued Reason" Style="{StaticResource InfoDisabledLabel}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                     Text="{Binding DiscontinuedReason}" IsEnabled="False"
+                     Style="{StaticResource InfoInput}"/>
+
+            <!-- Row 3: Order Confirmation / EU Country / Has File -->
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Order Confirmation" Style="{StaticResource InfoLabel}"/>
+            <ComboBox Grid.Row="3" Grid.Column="1" Margin="0,0,8,0"
+                      Text="{Binding OrderConfirmation}" ItemsSource="{Binding YesNoOptions}"
+                      Style="{StaticResource InfoCombo}"/>
+
+            <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="72"/>
+                    <ColumnDefinition Width="55"/>
+                    <ColumnDefinition Width="55"/>
+                    <ColumnDefinition Width="55"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="EU Country" Style="{StaticResource InfoLabel}"/>
+                <ComboBox Grid.Column="1" Margin="0,0,6,0"
+                          Text="{Binding EuCountry}" ItemsSource="{Binding YesNoOptions}"
+                          Style="{StaticResource InfoCombo}"/>
+
+                <TextBlock Grid.Column="2" Text="Has File" Style="{StaticResource InfoLabel}"/>
+                <ComboBox Grid.Column="3"
+                          Text="{Binding HasFile}" ItemsSource="{Binding YesNoOptions}"
+                          Style="{StaticResource InfoCombo}"/>
+            </Grid>
+
+            <!-- Row 4: Imported / WEEE Reg. -->
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Imported" Style="{StaticResource InfoLabel}"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" Margin="0,0,8,0"
+                      Text="{Binding Imported}" ItemsSource="{Binding YesNoOptions}"
+                      Style="{StaticResource InfoCombo}"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="2" Text="WEEE Reg." Style="{StaticResource InfoLabel}"/>
+            <TextBox Grid.Row="4" Grid.Column="3" Text="{Binding WeeeReg}" Style="{StaticResource InfoInput}"/>
+
+            <!-- Row 6: Supplier Message -->
+            <Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"
+                    BorderBrush="#8C8C8C" BorderThickness="1" Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="4,4,4,4">
+                        <TextBlock Text="Supplier Message" FontWeight="SemiBold" FontSize="12"/>
+                        <TextBlock Text="(This will appear against all"
+                                   FontStyle="Italic" FontSize="10" TextWrapping="Wrap"/>
+                        <TextBlock Text="the products as a sales"
+                                   FontStyle="Italic" FontSize="10" TextWrapping="Wrap"/>
+                        <TextBlock Text="message)"
+                                   FontStyle="Italic" FontSize="10" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <TextBox Grid.Column="1"
+                             Text="{Binding SupplierMessage}"
+                             AcceptsReturn="True" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             BorderThickness="1,0,0,0"
+                             BorderBrush="#8C8C8C"
+                             FontSize="12" Padding="4"/>
+                </Grid>
+            </Border>
+
+            <!-- Row 8: Useful Information -->
+            <Border Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"
+                    BorderBrush="#8C8C8C" BorderThickness="1" Background="White">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="4,4,4,4">
+                        <TextBlock Text="Useful Information" FontWeight="SemiBold" FontSize="12"/>
+                        <TextBlock Text="(i.e. Image banks links,"
+                                   FontStyle="Italic" FontSize="10" TextWrapping="Wrap"/>
+                        <TextBlock Text="passwords etc)"
+                                   FontStyle="Italic" FontSize="10" TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <TextBox Grid.Column="1"
+                             Text="{Binding UsefulInformation}"
+                             AcceptsReturn="True" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             BorderThickness="1,0,0,0"
+                             BorderBrush="#8C8C8C"
+                             FontSize="12" Padding="4"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- ===================== MIDDLE BUTTON STACK ===================== -->
+        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+            <Button Content="Carriage Calculator"
+                    Command="{Binding OpenCarriageCalculatorCommand}"
+                    Height="34" Margin="0,0,0,6" Padding="4"/>
+            <Button Content="Part Code Lookup"
+                    Command="{Binding OpenPartCodeLookupCommand}"
+                    Height="34" Margin="0,0,0,6" Padding="4"/>
+            <Button Content="Calculate ROI Selling"
+                    Command="{Binding CalculateRoiSellingCommand}"
+                    Height="34" Padding="4"/>
+        </StackPanel>
+
+        <!-- ===================== RIGHT PANEL ===================== -->
+        <Grid Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="52"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="52"/>
+                <RowDefinition Height="8"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+                <RowDefinition Height="26"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Row 0: Payment Terms -->
+            <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource InfoLabelBordered}">
+                <TextBlock Text="Payment Terms" Style="{StaticResource InfoLabel}" Margin="4,0,0,0"/>
+            </Border>
+            <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
+                     Text="{Binding PaymentTerms}" Style="{StaticResource InfoInput}"/>
+
+            <!-- Row 1: Settlement Discount -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Settlement Discount" Style="{StaticResource InfoLabel}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                     Text="{Binding SettlementDiscount}" Style="{StaticResource InfoInput}"/>
+
+            <!-- Row 2: Rebate Terms (taller) -->
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Rebate Terms"
+                       Style="{StaticResource InfoLabel}" VerticalAlignment="Top" Margin="0,4,0,0"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                     Text="{Binding RebateTerms}"
+                     AcceptsReturn="True" TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto"
+                     FontSize="12" Padding="4"/>
+
+            <!-- Row 3: Rebate Start Month / Rebate Start Day -->
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Rebate Start Month" Style="{StaticResource InfoLabel}"/>
+            <ComboBox Grid.Row="3" Grid.Column="1" Margin="0,0,8,0"
+                      Text="{Binding RebateStartMonth}" ItemsSource="{Binding MonthOptions}"
+                      Style="{StaticResource InfoCombo}"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="Rebate Start Day" Style="{StaticResource InfoLabel}"/>
+            <ComboBox Grid.Row="3" Grid.Column="3"
+                      Text="{Binding RebateStartDay}" ItemsSource="{Binding DayOptions}"
+                      Style="{StaticResource InfoCombo}"/>
+
+            <!-- Row 4: Returns Policy -->
+            <Border Grid.Row="4" Grid.Column="0" Style="{StaticResource InfoLabelBordered}"
+                    VerticalAlignment="Top" Height="24">
+                <TextBlock Text="Returns Policy" Style="{StaticResource InfoLabel}" Margin="4,0,0,0"/>
+            </Border>
+            <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"
+                     Text="{Binding ReturnsPolicy}"
+                     AcceptsReturn="True" TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto"
+                     FontSize="12" Padding="4"/>
+
+            <!-- Row 6: Additional Costs / Contribution Amount -->
+            <Border Grid.Row="6" Grid.Column="0" Style="{StaticResource InfoLabelBordered}">
+                <TextBlock Text="Additional Costs" Style="{StaticResource InfoDisabledLabel}" Margin="4,0,0,0"/>
+            </Border>
+            <Button Grid.Row="6" Grid.Column="1" Content="Edit" Width="70" HorizontalAlignment="Left"
+                    Command="{Binding EditAdditionalCostsCommand}"/>
+
+            <TextBlock Grid.Row="6" Grid.Column="2" Text="Contribution Amount" Style="{StaticResource InfoLabel}"/>
+            <TextBox Grid.Row="6" Grid.Column="3" Text="{Binding ContributionAmount}" Style="{StaticResource InfoInput}"/>
+
+            <!-- Row 7: Currency -->
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="Currency" Style="{StaticResource InfoLabel}"/>
+            <Grid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox Grid.Column="0" Text="{Binding Currency}" ItemsSource="{Binding CurrencyOptions}"
+                          Style="{StaticResource InfoCombo}"/>
+                <TextBox Grid.Column="2" Text="{Binding CurrencyRate}" Style="{StaticResource InfoInput}"/>
+            </Grid>
+
+            <!-- Row 8: Pricing Start Month -->
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="Pricing Start Month" Style="{StaticResource InfoLabel}"/>
+            <ComboBox Grid.Row="8" Grid.Column="1"
+                      Text="{Binding PricingStartMonth}" ItemsSource="{Binding MonthOptions}"
+                      Style="{StaticResource InfoCombo}"/>
+        </Grid>
     </Grid>
 </UserControl>

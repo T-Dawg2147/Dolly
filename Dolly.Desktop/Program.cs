@@ -47,6 +47,7 @@ public static class Program
                 services.AddTransient<IRelatedProductsService, RelatedProductsService>();
                 services.AddTransient<IAddRelatedProductDialogService, AddRelatedProductDialogService>();
                 services.AddTransient<IRelatedProductsDialogService, RelatedProductsDialogService>();
+                services.AddTransient<IReportParameterPromptService, ReportParameterPromptService>();
                 services.AddSingleton<ICurrentUserService, CurrentUserService>();
                 services.AddSingleton<IUserDialogService, UserDialogService>();
 

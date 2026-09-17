@@ -60,4 +60,6 @@ public sealed class SupplierProductRow
     public decimal? ZoneD { get; set; }
     public decimal? ZoneE { get; set; }
     public decimal? ZoneS { get; set; }
+
+    public string? ObjectType { get; set; }
 }

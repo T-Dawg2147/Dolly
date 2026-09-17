@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Dolly.Application.Abstraction;
 using Dolly.Application.Models;
+using Dolly.Desktop.Services;
 
 namespace Dolly.Desktop.ViewModels;
 
@@ -46,7 +47,7 @@ public partial class AddRelatedProductViewModel(
     {
         if (string.IsNullOrWhiteSpace(RelatedParent) || string.IsNullOrWhiteSpace(RelatedCode)) return;
 
-        var result = await _relatedService.AddRelatedWithStateAsync(RelatedParent, RelatedCode, _currentUser.Username);
+        var result = await _relatedService.AddRelatedWithStateAsync(RelatedParent, RelatedCode, CurrentUserService.Username);
 
         if (string.Equals(result.State, "Exists", StringComparison.OrdinalIgnoreCase))
         {

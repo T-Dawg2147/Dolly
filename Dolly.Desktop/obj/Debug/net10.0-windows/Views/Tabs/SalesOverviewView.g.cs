@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Dolly.Application.Models;
 using Dolly.Desktop.Views.Tabs;
 using System;
 using System.Diagnostics;

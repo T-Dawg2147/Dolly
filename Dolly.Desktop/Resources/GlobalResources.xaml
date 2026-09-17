@@ -188,33 +188,12 @@
     <!-- Default GroupBox -->
     <Style TargetType="GroupBox">
         <Setter Property="Margin" Value="0"/>
-        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Padding" Value="8"/>
         <Setter Property="BorderBrush" Value="{StaticResource GlobalBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Foreground" Value="{StaticResource GlobalLegendBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="GroupBox">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Border Grid.Row="1"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="Transparent"
-                                CornerRadius="2"
-                                Margin="0,8,0,0"/>
-                        <Border Grid.Row="0" Background="{StaticResource GlobalBgBrush}" Margin="10,0,0,0" Padding="4,0">
-                            <ContentPresenter ContentSource="Header"/>
-                        </Border>
-                        <ContentPresenter Grid.Row="1" Margin="6"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        
     </Style>
 
     <!-- Styled GroupBox - with key for backward compatibility -->

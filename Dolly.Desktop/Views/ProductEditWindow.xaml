@@ -67,17 +67,17 @@
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.06*"/>
-                <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="1.11*"/>
-                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="0.98*"/>
             </Grid.ColumnDefinitions>
 
             <!-- LEFT -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="5"/>
                     <RowDefinition Height="2.35*"/>
                     <RowDefinition Height="8"/>
                     <RowDefinition Height="1.80*"/>
@@ -86,18 +86,27 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions><ColumnDefinition Width="115"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions><RowDefinition Height="26"/><RowDefinition Height="26"/></Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="115"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="23"/>
+                        <RowDefinition Height="24"/>
+                    </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Long Description 1" VerticalAlignment="Center"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding LongDescription1}"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Long Description 2" VerticalAlignment="Center"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding LongDescription2}"/>
                 </Grid>
 
-                <GroupBox Grid.Row="2" Header="Supplier and Costs">
+                <GroupBox Grid.Row="2" Header="Supplier and Costs" >
                     <Grid Margin="8">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="132"/><ColumnDefinition Width="*"/><ColumnDefinition Width="86"/><ColumnDefinition Width="74"/>
+                            <ColumnDefinition Width="132"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="86"/>
+                            <ColumnDefinition Width="74"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/>
@@ -247,17 +256,26 @@
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="42"/>
-                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="15"/>
                     <RowDefinition Height="2.35*"/>
-                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="5"/>
                     <RowDefinition Height="1.30*"/>
-                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="5"/>
                     <RowDefinition Height="1.55*"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions><ColumnDefinition Width="90"/><ColumnDefinition Width="*"/><ColumnDefinition Width="84"/><ColumnDefinition Width="*"/><ColumnDefinition Width="120"/></Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions><RowDefinition Height="20"/><RowDefinition Height="20"/></Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="65"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="84"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Parent ID" VerticalAlignment="Center"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ParentId}" IsReadOnly="True"/>

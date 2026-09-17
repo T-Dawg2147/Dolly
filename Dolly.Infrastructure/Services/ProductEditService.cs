@@ -202,7 +202,7 @@ public sealed class ProductEditService(IConfiguration config) : IProductEditServ
         try
         {
             await using var conn = new SqlConnection(_cs);
-            await conn.ExecuteAsync("catalogue.usp_PushToMagento", new { DesignNo = designNo }, commandType: CommandType.StoredProcedure);
+            await conn.ExecuteAsync("Catalogue.usp_PushToMagento", new { DesignNo = designNo }, commandType: CommandType.StoredProcedure);
             return new PushToMagentoResult { Success = true };
         }
         catch (Exception ex)

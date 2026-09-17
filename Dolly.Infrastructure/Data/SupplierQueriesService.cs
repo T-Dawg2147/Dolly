@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using System.Data;
+using Dapper;
 using Dolly.Application.Abstraction;
 using Dolly.Application.Models;
 using Microsoft.Data.SqlClient;
@@ -26,6 +27,19 @@ public sealed class SupplierQueriesService(IConfiguration config) : ISupplierQue
         var rows = await conn.QueryAsync<SupplierSummary>(new CommandDefinition(sql, new { term = term ?? "" },
             cancellationToken: ct));
         return rows.AsList();
+    }
+
+    public async Task<IReadOnlyList<string>> GetCountries(CancellationToken ct = default)
+    {
+        const string sql = """
+                           SELECT
+                            [CountryOfOrigin]
+                           FROM [Catalogue].[CountryOfOrigin]
+                           """;
+
+        await using var conn = new SqlConnection(_cs);
+        var rows = await conn.QueryAsync<string>(sql, ct);
+        return rows.ToList();
     }
 
     public async Task<SupplierDetailsRow?> GetSupplierDetailsAsync(string supplierCode, CancellationToken ct = default)
@@ -347,12 +361,57 @@ public sealed class SupplierQueriesService(IConfiguration config) : ISupplierQue
         const string sql = """
                            SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
                            SELECT
-                                *
-                           FROM Catalogue.fn_ProductOverview(@Code);
+                           	p.Description,
+                           	p.[Part No] AS [PartNo],
+                           	p.[Stock Status] AS [StockStatus],
+                           	p.[Stock Control] AS [StockControl],
+                           	p.[Next Day] AS [NextDay],
+                           	p.[Run To Zero] AS [RunToZero],
+                           	p.[MOQ] AS [Moq],
+                           	p.[Lead Time] AS [LeadTime],
+                           	p.[Free Stock] AS [FreeStock],
+                           	p.[Available Stock] AS [AvailableStock],
+                           	p.[Stock Cost] AS [StockCost],
+                           	p.[Back Orders] AS [BackOrders],
+                           	p.[Date into Stock] AS [DateIntoStock],
+                           	p.[List Price] AS [ListCost],
+                           	p.Discount AS [Discount],
+                           	p.[Net Cost] AS [NetCost],
+                           	p.[Landed Cost] AS [LandedCost],
+                           	p.Carriage,
+                           	p.[Additional Costs] AS [AdditionalCosts],
+                           	p.[Total Cost] AS [TotalCost],
+                           	p.[Selling Price £] AS [SellingPriceGbp],
+                           	p.[Selling Price €] AS [SellingPriceEuro],
+                           	p.Margin,
+                           	p.[SOC Margin] AS [SocMargin],
+                           	p.[Units Y3] AS [UnitsY3],
+                           	p.[Units Y2] AS [UnitsY2],
+                           	p.[Units Y1] AS [UnitsY1],
+                           	p.[Units YTD] AS [UnitsYtd],
+                           	p.[Sales Y3] AS [SalesY3],
+                           	p.[Sales Y2] AS [SalesY2],
+                           	p.[Sales Y1] AS [SalesY1],
+                           	p.[Sales YTD] AS [SalesYtd],
+                           	p.Release_Date AS [ReleaseDate],
+                           	p.[Sales Message] AS [SalesMessage],
+                           	p.[Web URL] AS [WebUrl]
+                           FROM Catalogue.fn_ProductOverview(@Code) P
                            """;
 
         await using var conn = new SqlConnection(_cs);
         return await conn.QueryFirstOrDefaultAsync<ProductOverviewRow>(new CommandDefinition(sql, new { Code = code },
             cancellationToken: ct));
+    }
+
+    public async Task SaveSupplierAddressAsync(string supplierCode, string username, CancellationToken ct = default)
+    {
+        const string sql = """
+                           EXEC Catalogue.usp_UpdateSupplier @SupplierCode, @Username
+                           """;
+
+        await using var conn = new SqlConnection(_cs);
+        var parameters = new { SupplierCode = supplierCode, Username = username };
+        conn.Query(sql, parameters);
     }
 }

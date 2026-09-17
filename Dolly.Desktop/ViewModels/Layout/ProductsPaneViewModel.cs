@@ -61,7 +61,7 @@ public sealed partial class ProductsPaneViewModel : ObservableObject
 
         var rows = await _queries.GetSupplierProductsAsync(_context.SelectedSupplierCode!, _context.ProductStatus);
         foreach (var row in rows) Products.Add(row);
-
+        
         ApplyGroupFilter(_context.GroupFilterParentId);
 
         if (!string.IsNullOrWhiteSpace(_context.SelectedProductCode))

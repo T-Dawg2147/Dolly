@@ -2,5 +2,5 @@
 
 public interface ICurrentUserService
 {
-    string Username { get; }
+    static string Username { get; }
 }

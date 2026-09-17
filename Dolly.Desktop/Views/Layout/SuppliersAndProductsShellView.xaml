@@ -13,7 +13,7 @@
         <!-- TOP ROW: Tabs, Image, and Overview panels -->
         <Grid Grid.Row="0" Name="TopPanelsGrid">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1000"/>
+                <ColumnDefinition Width="960"/>
                 <ColumnDefinition Width="8"/>
                 <ColumnDefinition Width="Auto" Name="ProductImageColumn"/>
                 <ColumnDefinition Width="8"/>

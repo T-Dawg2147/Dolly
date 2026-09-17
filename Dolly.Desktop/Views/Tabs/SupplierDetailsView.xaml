@@ -1,7 +1,13 @@
 ﻿<UserControl x:Class="Dolly.Desktop.Views.Tabs.SupplierDetailsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:Dolly.Desktop.Converters"
              MinWidth="960">
+    <UserControl.Resources>
+        <conv:BoolToColorConverter x:Key="BoolToColorConverter"/>
+        <conv:InverseBoolConverter x:Key="InverseBoolConverter" />
+    </UserControl.Resources>
+    
     <Grid Margin="6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.70*"/>
@@ -56,26 +62,35 @@
                 <Grid>
                     <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="70"/></Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="Supplier Address" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Button Grid.Column="1" Content="Edit" Command="{Binding EditSupplierAddressCommand}" Margin="0"
+                    <Button Grid.Column="1" Content="{Binding EditAddressButtonText}" Command="{Binding EditSupplierAddressCommand}" Margin="0"
                             HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
                 </Grid>
             </Border>
 
             <TextBlock Grid.Row="5" Grid.Column="0" Text="Address Line1" Style="{StaticResource LabelTextBlock}"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AddressLine1}"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AddressLine1}" 
+                     IsReadOnly="{Binding IsAddressEditable, Converter={StaticResource InverseBoolConverter}}"/>
+
             <TextBlock Grid.Row="6" Grid.Column="0" Text="Address Line2" Style="{StaticResource LabelTextBlock}"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AddressLine2}"/>
+            <TextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AddressLine2}"
+                     IsReadOnly="{Binding IsAddressEditable, Converter={StaticResource InverseBoolConverter}}"/>
+
             <TextBlock Grid.Row="7" Grid.Column="0" Text="Address Line3" Style="{StaticResource LabelTextBlock}"/>
-            <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AddressLine3}"/>
+            <TextBox Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AddressLine3}"
+                     IsReadOnly="{Binding IsAddressEditable, Converter={StaticResource InverseBoolConverter}}"/>
+
             <TextBlock Grid.Row="8" Grid.Column="0" Text="Address Line4" Style="{StaticResource LabelTextBlock}"/>
-            <TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AddressLine4}"/>
+            <TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AddressLine4}"
+                     IsReadOnly="{Binding IsAddressEditable, Converter={StaticResource InverseBoolConverter}}"/>
+
             <TextBlock Grid.Row="9" Grid.Column="0" Text="Address Line5" Style="{StaticResource LabelTextBlock}"/>
             <TextBox Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding AddressLine5}"
-                     VerticalAlignment="Top"/>
+                     VerticalAlignment="Top"
+                     IsReadOnly="{Binding IsAddressEditable, Converter={StaticResource InverseBoolConverter}}"/>
 
             <TextBlock Grid.Row="10" Grid.Column="0" Text="Country" Style="{StaticResource LabelTextBlock}"/>
             <ComboBox Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Country}" Margin="0,0,90,0"
-                      IsEditable="True" IsTextSearchEnabled="True" StaysOpenOnEdit="True"
+                      IsEnabled="{Binding IsAddressEditable}" IsTextSearchEnabled="True" StaysOpenOnEdit="True"
                       ItemsSource="{Binding Countries}" SelectedItem="Country"/>
 
             <TextBlock Grid.Row="12" Grid.Column="0" Text="Post Code" Style="{StaticResource LabelTextBlock}"/>
@@ -168,8 +183,8 @@
 
             <CheckBox Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="2" Content="Back Orders By Product" IsChecked="{Binding BackOrdersByProduct}"/>
             <CheckBox Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="2" Content="Back Orders By Parent" IsChecked="{Binding BackOrdersByParent}"/>
-            <Button Grid.Row="15" Grid.Column="1" Grid.RowSpan="2" Content="Close" Command="{Binding CloseCommand}" Background="#E53935" Foreground="Black"
-                    Margin="100,0,35,0"/>
+            <Button Grid.Row="15" Grid.Column="2" Grid.RowSpan="2" Content="Close" Command="{Binding CloseCommand}" Background="#E53935" Foreground="White"
+                    Width="60"/>
 
             <GroupBox Grid.Row="11" Grid.Column="2" Grid.RowSpan="5" Margin="-25,-8,0,0" BorderThickness="0">
                 <StackPanel Margin="-3,0,0,0" >
@@ -177,9 +192,8 @@
                         <TextBlock Text="Parent Address" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <CheckBox Content="Reporting Supplier" IsChecked="{Binding ReportingSupplier}"/>
-                    <CheckBox Content="Hide withdrawn" IsChecked="{Binding HideWithdrawn}"/>
-                    <CheckBox Content="Show withdrawn" IsChecked="{Binding ShowWithdrawn}"/>
                     <CheckBox Content="Contains Supplier" IsChecked="{Binding ContainsSupplier}"/>
+                    <CheckBox Content="Hide withdrawn" IsChecked="{Binding ShowWithdrawn}" Background="{Binding ShowWithdrawn, Converter={StaticResource BoolToColorConverter}}"/>
                 </StackPanel>
             </GroupBox>
         </Grid>

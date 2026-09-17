@@ -2,7 +2,7 @@
 
 namespace Dolly.Desktop.Services;
 
-public sealed class CurrentUserService : ICurrentUserService
+public class CurrentUserService : ICurrentUserService
 {
-    public string Username => Environment.UserName;
+    public static string Username => Environment.UserName;
 }

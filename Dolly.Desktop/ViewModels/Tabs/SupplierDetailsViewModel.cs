@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Dolly.Application.Abstraction;
 using Dolly.Application.Models;
+using Dolly.Desktop.Services;
 
 namespace Dolly.Desktop.ViewModels.Tabs;
 
@@ -18,19 +19,13 @@ public sealed partial class SupplierDetailsViewModel : ObservableObject
         _cache = cache;
         _context = context;
 
-        SendQuestionnaireOptions.Add("No");
-        SendQuestionnaireOptions.Add("Question");
-        ExtensionOptions.Add("No");
-        ExtensionOptions.Add("Extension");
-        HeldOptions.Add("No");
-        HeldOptions.Add("Held Letter");
-
         SendQuestionnaire = "No";
         GrantExtension = "No";
         HeldLetter = "No";
-        ShowWithdrawn = true;
+        ShowWithdrawn = false;
 
         _ = LoadSuppliersAsync();
+        _ = LoadCountries();
 
         _context.PropertyChanged += async (_, e) =>
         {
@@ -81,7 +76,7 @@ public sealed partial class SupplierDetailsViewModel : ObservableObject
     [ObservableProperty] private bool _backOrdersByParent;
     [ObservableProperty] private bool _reportingSupplier;
     [ObservableProperty] private bool _hideWithdrawn;
-    [ObservableProperty] private bool _showWithdrawn = true;
+    [ObservableProperty] private bool _showWithdrawn = false;
     [ObservableProperty] private bool _containsSupplier;
 
     // ---------- Pricing Questionnaire ----------
@@ -96,15 +91,19 @@ public sealed partial class SupplierDetailsViewModel : ObservableObject
     [ObservableProperty] private bool _showDelSuppliers; // TODO: I have never seen this checkbox in my LIFE. gotta look int functionality
     #endregion
 
-    public ObservableCollection<string> SendQuestionnaireOptions { get; } = ["No", "Question"]; // TODO want to look through all collections, make sure the values are correct.
-    public ObservableCollection<string> ExtensionOptions { get; } = ["No", "Extension"]; // TODO
-    public ObservableCollection<string> HeldOptions { get; } = ["No", "Held Letter"]; // TODO
-    public ObservableCollection<string> Conutries { get; } = [];
+    // TODO:
+    // Go through all these lists/what uses these lists.
+    // Might setup a singleton list that each ComboBox can build a new object from tht singleton.
+    // Saves memory and CPU time.
+    public ObservableCollection<string> SendQuestionnaireOptions { get; } = ["No", "Yes"];
+    public ObservableCollection<string> ExtensionOptions { get; } = ["No", "Yes"];
+    public ObservableCollection<string> HeldOptions { get; } = ["No", "Yes"];
+    public ObservableCollection<string> Countries { get; } = [];
     public ObservableCollection<SupplierSummary> Suppliers { get; } = [];
 
     partial void OnReportingSupplierChanged(bool value) => _context.ReportingSupplier = value;
     partial void OnContainsSupplierChanged(bool value) => _context.ContainsSupplier = value;
-    partial void OnShowWithdrawnChanged(bool value) => _context.ProductStatus = value ? 1 : 0;
+    partial void OnShowWithdrawnChanged(bool value) => _context.ProductStatus = value ? 0 : 1;
     partial void OnSelectedSupplierChanged(SupplierSummary? value)
     {
         _context.SelectedSupplierCode = value?.SupplierCode;
@@ -159,16 +158,54 @@ public sealed partial class SupplierDetailsViewModel : ObservableObject
     
     // TODO: The below code are all stub methods; they do nothing, just fill the hole until code is added
     #region To look at
+    
     [RelayCommand]
     private Task ChangeNameAsync()
     {
         return Task.CompletedTask;
     }
+    
+    [ObservableProperty] private bool _isAddressEditable;
+    [ObservableProperty] private string _editAddressButtonText = "Edit";
+    
+    private string? _originalAddressLine1;
+    private string? _originalAddressLine2;
+    private string? _originalAddressLine3;
+    private string? _originalAddressLine4;
+    private string? _originalAddressLine5;
+    private string? _originalCountry;
+    private string? _originalPostCode;
+    private string? _originalTelephoneNo;
 
     [RelayCommand]
-    private Task EditSupplierAddressAsync()
+    private async Task EditSupplierAddressAsync()
     {
-        return Task.CompletedTask;
+        if (SelectedSupplier is not null)
+        {
+            if (!IsAddressEditable)
+            {
+                // Address is NOT editable - Make them all editable and make the "Edit" button the "Save" button
+                _originalAddressLine1 = AddressLine1;
+                _originalAddressLine2 = AddressLine2;
+                _originalAddressLine3 = AddressLine3;
+                _originalAddressLine4 = AddressLine4;
+                _originalAddressLine5 = AddressLine5;
+                _originalCountry = Country;
+                _originalPostCode = PostCode;
+                _originalTelephoneNo = TelephoneNo;
+
+                IsAddressEditable = true;
+                EditAddressButtonText = "Save";
+            }
+            else
+            {
+                // Address is editable - the button will be "Save" at this point. Perform save and update button title/updatable status
+                await _queries.SaveSupplierAddressAsync(SelectedSupplier.SupplierCode, CurrentUserService.Username);
+
+                IsAddressEditable = false;
+                EditAddressButtonText = "Edit";
+            }
+        }
     }
 
     [RelayCommand]
@@ -252,5 +289,13 @@ public sealed partial class SupplierDetailsViewModel : ObservableObject
         ParentAddressLine1 = ParentAddressLine2 = ParentAddressLine3 = ParentAddressLine4 = ParentAddressLine5 = "";
         ParentPostCode = ParentTelephoneNo = "";
         PricingComments = "";
+    }
+    
+    // This only need to be loaded once. Right now, it saves the Countries list in this ViewModel but Countires will be needed elsewhere im sure. Will need to assign to a global list.
+    private async Task LoadCountries()
+    {
+        var results = await _queries.GetCountries();
+        Countries.Clear();
+        foreach (var c in results) Countries.Add(c);
     }
 }
