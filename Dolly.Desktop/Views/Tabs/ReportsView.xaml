@@ -46,7 +46,7 @@
                         Content="{Binding Title}"
                         ToolTip="{Binding Description}"
                         Command="{Binding DataContext.RunReportCommand,
-                          RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                          RelativeSource={RelativeSource AncestorType=UserControl}}"
                         CommandParameter="{Binding}"/>
             </Grid>
         </DataTemplate>

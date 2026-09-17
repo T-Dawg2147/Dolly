@@ -22,9 +22,7 @@ public sealed class GenericReportRunner(
         bool reportingSupplier, IReadOnlyDictionary<string, object?>? extraParameters = null,
         CancellationToken ct = default)
     {
-        // ADDED: CUSTOM reports delegate straight to the existing, already-working
-        // IReportExportService methods instead of trying to build generic SQL for them.
-        if (string.Equals(report.SourceKind, "CUSTOM", StringComparison.OrdinalIgnoreCase))
+        if (NeedsLegacyExport(report))
         {
             await RunCustomReportAsync(report, outputFolder, supplierCode, reportingSupplier, ct);
             return;
@@ -46,8 +44,11 @@ public sealed class GenericReportRunner(
         ], ct);
     }
 
-    // ADDED: routes specific catalog entries back to the hand-written service methods.
-    // Match on Title here rather than magic strings scattered around — keeps this in one place.
+    private static bool NeedsLegacyExport(ReportDefinition report) =>
+        string.Equals(report.SourceKind, "CUSTOM", StringComparison.OrdinalIgnoreCase)
+        || string.Equals(report.Title, "Supplier Report", StringComparison.OrdinalIgnoreCase)
+        || string.Equals(report.Title, "Customer Sales By Supplier", StringComparison.OrdinalIgnoreCase);
+
     private async Task RunCustomReportAsync(
         ReportDefinition report, string outputFolder, string? supplierCode, bool reportingSupplier,
         CancellationToken ct)
@@ -76,8 +77,6 @@ public sealed class GenericReportRunner(
         ReportDefinition report, string? supplierCode, bool reportingSupplier,
         IReadOnlyDictionary<string, object?>? extra)
     {
-        // CHANGED: switch is now case-insensitive so catalog rows aren't broken by casing
-        // (e.g. "date" vs "Date"), and RequiresReportingSupplierFlag is now respected.
         return report.ParameterMode.ToLowerInvariant() switch
         {
             "hierarchyleaf" => (
@@ -88,8 +87,8 @@ public sealed class GenericReportRunner(
                 $"EXEC {report.SourceObject} @ForDate",
                 new { ForDate = extra?["ForDate"] }),
 
-            "supplliercontext" or "supplierContext" => // guard kept intentionally permissive
-                BuildSupplierContextQuery(report, supplierCode, reportingSupplier),
+            "suppliercontext" or "supplliercontext" =>
+                BuildSupplierContextQuery(report, supplierCode),
 
             "none" => (
                 $"SELECT * FROM {report.SourceObject}",
@@ -99,27 +98,12 @@ public sealed class GenericReportRunner(
         };
     }
 
-    // ADDED: this is the piece that was missing entirely — reports that need to switch
-    // between "Supplier_Code" and "Reporting_Supplier" behaviour based on the checkbox,
-    // same as the VBA's `chkReportingSupplier` branch.
     private static (string sql, object? parameters) BuildSupplierContextQuery(
-        ReportDefinition report, string? supplierCode, bool reportingSupplier)
+        ReportDefinition report, string? supplierCode)
     {
         if (!report.RequiresSupplierCode)
             return ($"SELECT * FROM {report.SourceObject}", null);
 
-        if (!report.RequiresReportingSupplierFlag)
-            return ($"SELECT * FROM {report.SourceObject}(@SupplierCode)", new { SupplierCode = supplierCode });
-
-        // Mirrors the VBA:
-        //   If Me.chkReportingSupplier = 0 Then
-        //       SqlStr = "... fn_CustomerSalesBySupplier (@SupplierCode)"
-        //   Else
-        //       SqlStr = "... fn_CustomerSalesByReportingSupplier (@SupplierCode)"
-        var functionName = reportingSupplier
-            ? report.SourceObject.Replace("BySupplier", "ByReportingSupplier")
-            : report.SourceObject;
-
-        return ($"SELECT * FROM {functionName}(@SupplierCode)", new { SupplierCode = supplierCode });
+        return ($"SELECT * FROM {report.SourceObject}(@SupplierCode)", new { SupplierCode = supplierCode });
     }
 }
