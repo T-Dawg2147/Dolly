@@ -1,12 +1,23 @@
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\bin\Debug\net10.0\Dolly.Application.deps.json
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\bin\Debug\net10.0\Dolly.Application.dll
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\bin\Debug\net10.0\Dolly.Application.pdb
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\obj\Debug\net10.0\Dolly.Application.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\obj\Debug\net10.0\Dolly.Application.AssemblyInfoInputs.cache
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\obj\Debug\net10.0\Dolly.Application.AssemblyInfo.cs
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\obj\Debug\net10.0\Dolly.Application.csproj.CoreCompileInputs.cache
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\obj\Debug\net10.0\Dolly.Application.dll
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\obj\Debug\net10.0\refint\Dolly.Application.dll
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\obj\Debug\net10.0\Dolly.Application.pdb
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\obj\Debug\net10.0\ref\Dolly.Application.dll
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Application\obj\Debug\net10.0\Dolly.Application.sourcelink.json
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/bin/Debug/net10.0/Dolly.Application.deps.json
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/bin/Debug/net10.0/Dolly.Application.dll
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/bin/Debug/net10.0/Dolly.Application.pdb
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.AssemblyInfoInputs.cache
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.AssemblyInfo.cs
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.csproj.CoreCompileInputs.cache
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.dll
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/obj/Debug/net10.0/refint/Dolly.Application.dll
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.pdb
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/obj/Debug/net10.0/ref/Dolly.Application.dll
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.sourcelink.json
+/home/runner/work/Dolly/Dolly/Dolly.Application/bin/Debug/net10.0/Dolly.Application.deps.json
+/home/runner/work/Dolly/Dolly/Dolly.Application/bin/Debug/net10.0/Dolly.Application.dll
+/home/runner/work/Dolly/Dolly/Dolly.Application/bin/Debug/net10.0/Dolly.Application.pdb
+/home/runner/work/Dolly/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/Dolly/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.AssemblyInfoInputs.cache
+/home/runner/work/Dolly/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.AssemblyInfo.cs
+/home/runner/work/Dolly/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.csproj.CoreCompileInputs.cache
+/home/runner/work/Dolly/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.dll
+/home/runner/work/Dolly/Dolly/Dolly.Application/obj/Debug/net10.0/refint/Dolly.Application.dll
+/home/runner/work/Dolly/Dolly/Dolly.Application/obj/Debug/net10.0/Dolly.Application.pdb
+/home/runner/work/Dolly/Dolly/Dolly.Application/obj/Debug/net10.0/ref/Dolly.Application.dll

@@ -1,16 +1,31 @@
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\bin\Debug\net10.0\Dolly.Infrastructure.deps.json
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\bin\Debug\net10.0\Dolly.Infrastructure.dll
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\bin\Debug\net10.0\Dolly.Infrastructure.pdb
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\bin\Debug\net10.0\Dolly.Application.dll
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\bin\Debug\net10.0\Dolly.Application.pdb
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.Infrastructure.csproj.AssemblyReference.cache
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.Infrastructure.AssemblyInfoInputs.cache
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.Infrastructure.AssemblyInfo.cs
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.Infrastructure.csproj.CoreCompileInputs.cache
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.In.89CBF7C2.Up2Date
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.Infrastructure.dll
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\refint\Dolly.Infrastructure.dll
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.Infrastructure.pdb
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\ref\Dolly.Infrastructure.dll
-C:\Users\harryc\RiderProjects\Access Remakes\Dolly\Dolly.Infrastructure\obj\Debug\net10.0\Dolly.Infrastructure.sourcelink.json
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/bin/Debug/net10.0/Dolly.Infrastructure.deps.json
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/bin/Debug/net10.0/Dolly.Infrastructure.dll
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/bin/Debug/net10.0/Dolly.Infrastructure.pdb
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/bin/Debug/net10.0/Dolly.Application.dll
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/bin/Debug/net10.0/Dolly.Application.pdb
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.csproj.AssemblyReference.cache
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.AssemblyInfoInputs.cache
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.AssemblyInfo.cs
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.csproj.CoreCompileInputs.cache
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.In.89CBF7C2.Up2Date
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.dll
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/refint/Dolly.Infrastructure.dll
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.pdb
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/ref/Dolly.Infrastructure.dll
+C:/Users/harryc/RiderProjects/Access Remakes/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.sourcelink.json
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/bin/Debug/net10.0/Dolly.Infrastructure.deps.json
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/bin/Debug/net10.0/Dolly.Infrastructure.dll
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/bin/Debug/net10.0/Dolly.Infrastructure.pdb
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/bin/Debug/net10.0/Dolly.Application.dll
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/bin/Debug/net10.0/Dolly.Application.pdb
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.csproj.AssemblyReference.cache
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.AssemblyInfoInputs.cache
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.AssemblyInfo.cs
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.csproj.CoreCompileInputs.cache
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.In.89CBF7C2.Up2Date
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.dll
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/refint/Dolly.Infrastructure.dll
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/Dolly.Infrastructure.pdb
+/home/runner/work/Dolly/Dolly/Dolly.Infrastructure/obj/Debug/net10.0/ref/Dolly.Infrastructure.dll

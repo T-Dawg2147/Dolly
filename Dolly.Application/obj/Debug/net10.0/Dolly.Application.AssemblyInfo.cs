@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Dolly.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90c69827bce58b5763bbd902ed5b9a7dba36d163")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+514eaf18fa92c810e53aae3dd5c75f5eb4e82962")]
 [assembly: System.Reflection.AssemblyProductAttribute("Dolly.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Dolly.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

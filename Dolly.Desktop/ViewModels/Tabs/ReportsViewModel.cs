@@ -49,7 +49,12 @@ public sealed partial class ReportsViewModel : ObservableObject
     {
         var reports = await _catalog.GetReportsAsync();
         AllReports.Clear();
-        foreach (var r in reports) AllReports.Add(r);
+        foreach (var r in reports)
+        {
+            r.Category = string.IsNullOrWhiteSpace(r.Category) ? "Other" : r.Category.Trim();
+            r.ParameterMode = string.IsNullOrWhiteSpace(r.ParameterMode) ? "None" : r.ParameterMode.Trim();
+            AllReports.Add(r);
+        }
     }
 
     partial void OnSearchTextChanged(string value) => FilteredReports.Refresh();
@@ -78,15 +83,11 @@ public sealed partial class ReportsViewModel : ObservableObject
     {
         if (report is null) return;
 
-        // REMOVED: the `if (report.IconKind == "Folder")` branch that lived here.
-        // "Open Specials Report Folder" is no longer part of the report catalog at all —
-        // see OpenSpecialsFolderAsync above.
-
         var extraParameters = new Dictionary<string, object?>();
 
-        switch (report.ParameterMode)
+        switch (report.ParameterMode.Trim().ToLowerInvariant())
         {
-            case "Date":
+            case "date":
                 var chosenDate = await _paramPrompt.PromptForDateAsync(
                     report.Title, "Please choose the month/year for this report.");
                 if (chosenDate is null)
@@ -97,7 +98,7 @@ public sealed partial class ReportsViewModel : ObservableObject
                 extraParameters["ForDate"] = chosenDate.Value;
                 break;
 
-            case "HierarchyLeaf":
+            case "hierarchyleaf":
                 var leafId = await _paramPrompt.PromptForHierarchyLeafAsync();
                 if (string.IsNullOrWhiteSpace(leafId))
                 {
