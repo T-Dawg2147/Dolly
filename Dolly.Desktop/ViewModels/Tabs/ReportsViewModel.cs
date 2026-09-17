@@ -38,11 +38,13 @@ public sealed partial class ReportsViewModel : ObservableObject
 
         FilteredReports = CollectionViewSource.GetDefaultView(AllReports);
         FilteredReports.Filter = FilterReport;
-        FilteredReports.GroupDescriptions.Add(new PropertyGroupDescription(nameof(ReportDefinition)));
+        FilteredReports.GroupDescriptions.Add(new PropertyGroupDescription(nameof(ReportDefinition.Category)));
+        // FIXED: was `nameof(ReportDefinition)` — see Bug 5 above
 
         _ = LoadReportsAsync();
     }
 
+    [RelayCommand] // CHANGED: was a private plain method with no way to manually refresh from the UI
     private async Task LoadReportsAsync()
     {
         var reports = await _catalog.GetReportsAsync();
@@ -62,24 +64,23 @@ public sealed partial class ReportsViewModel : ObservableObject
                || report.Category.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
     }
 
+    // ADDED: standalone command for the folder button, completely separate from the report catalog.
+    [RelayCommand]
+    private async Task OpenSpecialsFolderAsync()
+    {
+        var folder = await _folderPicker.PickFolderAsync("Open Specials Report Folder");
+        if (folder is not null)
+            System.Diagnostics.Process.Start("explorer.exe", folder);
+    }
+
     [RelayCommand]
     private async Task RunReportAsync(ReportDefinition? report)
     {
         if (report is null) return;
 
-        // Gonna re-do this portion at some point. Allows some jobs to open its own prompt 
-        /*if (report.ParameterMode == "OpensDialog")
-        {
-            await _reportOptionsDialog.ShowAsync();
-            return;
-        }*/
-
-        if (report.IconKind == "Folder")
-        {
-            var folder = await _folderPicker.PickFolderAsync("Open Specials Report Folder");
-            if (folder is not null) System.Diagnostics.Process.Start("explorer.exe", folder);
-            return;
-        }
+        // REMOVED: the `if (report.IconKind == "Folder")` branch that lived here.
+        // "Open Specials Report Folder" is no longer part of the report catalog at all —
+        // see OpenSpecialsFolderAsync above.
 
         var extraParameters = new Dictionary<string, object?>();
 
@@ -88,10 +89,14 @@ public sealed partial class ReportsViewModel : ObservableObject
             case "Date":
                 var chosenDate = await _paramPrompt.PromptForDateAsync(
                     report.Title, "Please choose the month/year for this report.");
-                if (chosenDate is null) return;
+                if (chosenDate is null)
+                {
+                    StatusMessage = "Export has been cancelled.";
+                    return;
+                }
                 extraParameters["ForDate"] = chosenDate.Value;
                 break;
-            
+
             case "HierarchyLeaf":
                 var leafId = await _paramPrompt.PromptForHierarchyLeafAsync();
                 if (string.IsNullOrWhiteSpace(leafId))

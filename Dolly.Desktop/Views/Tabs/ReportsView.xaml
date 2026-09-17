@@ -22,6 +22,7 @@
             <Setter Property="FontSize" Value="12"/>
         </Style>
 
+        <!-- REPLACE the entire ReportItemTemplate (it referenced two undefined converters) -->
         <DataTemplate x:Key="ReportItemTemplate" DataType="{x:Type models:ReportDefinition}">
             <Grid Margin="0,0,0,4">
                 <Grid.ColumnDefinitions>
@@ -32,9 +33,10 @@
 
                 <Border Grid.Column="0"
                         Width="28" Height="28"
-                        Background="{Binding IconKind, Converter={StaticResource ReportIconBackgroundConverter}}"
+                        Background="#1D6F42"
                         BorderBrush="#8C8C8C" BorderThickness="1">
-                    <TextBlock Text="{Binding IconKind, Converter={StaticResource ReportIconGlyphConverter}}"
+                    <TextBlock Text="X"
+                               Foreground="White"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                FontWeight="Bold" FontSize="12"/>
                 </Border>
@@ -44,7 +46,7 @@
                         Content="{Binding Title}"
                         ToolTip="{Binding Description}"
                         Command="{Binding DataContext.RunReportCommand,
-                                  RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                          RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                         CommandParameter="{Binding}"/>
             </Grid>
         </DataTemplate>
@@ -74,6 +76,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="8"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="8"/>
+            <RowDefinition Height="Auto"/>
+            <!-- ADDED two rows above for the standalone folder button -->
         </Grid.RowDefinitions>
 
         <!-- Search bar -->
@@ -113,5 +118,12 @@
                 </GroupStyle>
             </ItemsControl.GroupStyle>
         </ItemsControl>
+        
+        <!-- Special Reports Folder -->
+        <Button Grid.Row="4"
+                HorizontalAlignment="Left"
+                Content="Open Specials Report Folder"
+                Command="{Binding OpenSpecialsFolderCommand}"
+                Padding="8,4"/>
     </Grid>
 </UserControl>

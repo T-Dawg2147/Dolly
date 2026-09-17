@@ -15,7 +15,7 @@ public sealed class ReportCatalogService(IConfiguration config) : IReportCatalog
     {
         const string sql = """
                            SELECT ReportId, Category, Title, Description, SourceObject, SourceKind,
-                                  RequiresSupplierCode, RequiresReportingSupplierFlag,
+                                  RequiresSupplierCode, RequiresReportingSupplierFlag, ParameterMode
                                   OutputFileName, SheetName, TitleTemplate, IconKind, SortOrder
                            FROM Catalogue.ReportCatalog
                            WHERE IsActive = 1

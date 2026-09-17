@@ -49,6 +49,8 @@ public static class Program
                 services.AddTransient<IRelatedProductsDialogService, RelatedProductsDialogService>();
                 services.AddTransient<IReportParameterPromptService, ReportParameterPromptService>();
                 services.AddSingleton<ICurrentUserService, CurrentUserService>();
+                services.AddSingleton<IReportCatalogService, ReportCatalogService>();
+                services.AddTransient<IGenericReportRunner, GenericReportRunner>();
                 services.AddSingleton<IUserDialogService, UserDialogService>();
 
                 // TODO: move to appsettings.json later
